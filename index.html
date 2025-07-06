@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carvelas Wash | Premium Mobile Car Detailing</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #003366;        /* Dark Blue */
+      --primary-dark: #001a33;
+      --secondary: #28a745;      /* Green */
+      --accent: #ffc107;         /* Accent Yellow */
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-blue: #e6f2ff;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f8ff 0%, #e6f7ff 100%);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: linear-gradient(to right, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    .logo h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    nav ul li a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--secondary);
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover:after,
+    nav ul li a.active:after {
+      width: 100%;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 60, 100, 0.85)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 8rem 1rem;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      border: 2px solid var(--secondary);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: transparent;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      color: var(--secondary);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      margin-left: 1rem;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-header h2:after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 4px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .section-header p {
+      color: var(--gray);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 1rem auto 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-top: 4px solid var(--primary);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      border-top-color: var(--secondary);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+    }
+
+    .service-card p {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-table {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid #e0e0e0;
+    }
+
+    .table-header {
+      background: var(--primary);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .table-header h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 1.2rem 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .highlight {
+      background-color: rgba(0, 51, 102, 0.05);
+      font-weight: 600;
+    }
+
+    /* CENTERED CONTACT SECTION */
+    .contact-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .contact-form {
+      background: white;
+      border-radius: 10px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    .checkbox-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .checkbox-option input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+    
+    .checkbox-option label {
+      margin: 0;
+      font-weight: normal;
+    }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--secondary);
+      border: 2px solid var(--secondary);
+      color: white;
+      padding: 0.8rem;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-block:hover {
+      background: #218838;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-column h4 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.8rem;
+    }
+
+    .footer-column h4:after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 3px;
+      background: var(--secondary);
+      bottom: 0;
+      left: 0;
+    }
+
+    .footer-column p {
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: var(--secondary);
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 992px) {
+      .hero h2 {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+      
+      .menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
+      }
+      
+      .hero {
+        padding: 6rem 1rem;
+      }
+      
+      .hero h2 {
+        font-size: 2.3rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .btn {
+        display: block;
+        width: max-content;
+        margin: 1rem auto;
+      }
+      
+      .btn-outline {
+        margin-left: 0;
+      }
+      
+      .section-header h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 4rem 1rem;
+      }
+      
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .logo h1 {
+        font-size: 1.5rem;
+      }
+      
+      .checkbox-group {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <i class="fas fa-car logo-icon"></i>
+        <h1>Carvelas <span>Wash</span></h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h2>Premium Mobile Car Detailing</h2>
+      <p>We bring the shine to your doorstep. Professional, eco-friendly car care at your convenience.</p>
+      <a href="#contact" class="btn">Book an Appointment</a>
+      <a href="#services" class="btn btn-outline">Our Services</a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Services</h2>
+        <p>Professional auto detailing services tailored to keep your vehicle looking its best</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <i class="fas fa-hand-sparkles service-icon"></i>
+          <h3>Exterior Hand Wash</h3>
+          <p>Gentle hand wash using premium products to protect your paint and leave a brilliant shine.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-vacuum service-icon"></i>
+          <h3>Interior Detailing</h3>
+          <p>Deep cleaning of seats, carpets, and surfaces to restore your interior to showroom condition.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-spray-can service-icon"></i>
+          <h3>Wax & Polish</h3>
+          <p>Professional polishing and protective wax application to enhance and preserve your paint.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-wind service-icon"></i>
+          <h3>Steam Cleaning</h3>
+          <p>Deep sanitization using high-temperature steam for interior surfaces and hard-to-clean areas.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-truck service-icon"></i>
+          <h3>Fleet Services</h3>
+          <p>Customized maintenance programs for business fleets with volume discounts.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-star service-icon"></i>
+          <h3>Premium Package</h3>
+          <p>Complete inside-and-out detailing for the ultimate in vehicle presentation and protection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <h2>Pricing</h2>
+        <p>Transparent pricing for all our premium services</p>
+      </div>
+      <div class="pricing-table">
+        <div class="table-header">
+          <h3>Service Packages</h3>
+          <p>All packages include complimentary interior vacuum and window cleaning</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Sedan</th>
+              <th>SUV/Truck</th>
+              <th>Premium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><tr class="highlight">
+              <td>Basic Exterior Wash</td>
+              <td>$80</td>
+              <td>90</td>
+              <td>-</td>
+            </tr>
+            <tr class="highlight">
+              <td>Interior Detailing</td>
+              <td>$100</td>
+              <td>$120</td>
+              <td>-</td>
+            </tr>
+            <tr>
+             
+            <tr class="highlight">
+              <td>Full Detail (Interior & Exterior)</td>
+              <td>$190</td>
+              <td>$220</td>
+              <td>$300</td>
+            </tr>
+            
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="text-align: center; margin-top: 1.5rem; color: var(--gray);">*Fleet and commercial vehicle pricing available upon request</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" style="background-color: var(--light-blue);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Contact Us</h2>
+        <p>Get in touch to schedule your appointment or ask questions</p>
+      </div>
+      <div class="contact-container">
+        <div class="contact-form">
+          <h3>Schedule Your Service</h3>
+          <form>
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="John Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="(123) 456-7890" required>
+            </div>
+            <div class="form-group">
+              <label for="vehicle">Vehicle Type</label>
+              <select id="vehicle" required>
+                <option value="">Select Vehicle Type</option>
+                <option value="sedan">Sedan</option>
+                <option value="suv">SUV/Crossover</option>
+                <option value="truck">Truck/Van</option>
+                <option value="luxury">Luxury Vehicle</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="service">Service Interested In</label>
+              <select id="service" required>
+                <option value="">Select Service</option>
+                <option value="basic">Basic Exterior Wash</option>
+                <option value="interior">Interior Detailing</option>
+                <option value="combo">Exterior + Interior Combo</option>
+                <option value="full">Full Detail</option>
+                <option value="steam">Steam Cleaning</option>
+                <option value="premium">Premium Package</option>
+                <option value="fleet">Fleet Services</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Can you provide the following at your location?</label>
+              <div class="checkbox-group">
+                <div class="checkbox-option">
+                  <input type="checkbox" id="water" name="resources" value="water">
+                  <label for="water">Water</label>
+                </div>
+                <div class="checkbox-option">
+                  <input type="checkbox" id="power" name="resources" value="power">
+                  <label for="power">Power</label>
+                </div>
+                <div class="checkbox-option">
+                  <input type="checkbox" id="none" name="resources" value="none">
+                  <label for="none">Water & Power not available</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Additional Details</label>
+              <textarea id="message" placeholder="Tell us about your vehicle and any special requests..."></textarea>
+            </div>
+            <button type="submit" class="btn-block">Request Appointment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>About Carvelas Wash</h4>
+          <p>Premium mobile car detailing service bringing professional vehicle care directly to your home or workplace throughout Washington State.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+            <li><a href="#pricing"><i class="fas fa-chevron-right"></i> Pricing</a></li>
+            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Our Services</h4>
+          <ul class="footer-links">
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Exterior Hand Wash</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Interior Cleaning</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Wax & Polish</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Steam Cleaning</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Fleet Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact Info</h4>
+          <ul class="footer-links">
+            <li><a href="tel:6192449791"><i class="fas fa-phone-alt"></i> 6192449791</a></li>
+            <li><a href="mailto:info@carvelaswash.com"><i class="fas fa-envelope"></i> carvelaswash@gmail.com</a></li>
+            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Washington State</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Carvelas Wash. All rights reserved. | Professional mobile car detailing services</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
