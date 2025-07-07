@@ -6,6 +6,7 @@
   <title>Carvelas Wash | Premium Mobile Car Detailing</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
   <style>
     :root {
       --primary: #003366;        /* Dark Blue */
@@ -18,6 +19,8 @@
       --light-blue: #e6f2ff;
       --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       --transition: all 0.3s ease;
+      --success: #28a745;
+      --error: #dc3545;
     }
 
     * {
@@ -311,6 +314,22 @@
       box-shadow: var(--shadow);
       width: 100%;
       max-width: 600px;
+      position: relative;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .form-header h3 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-header p {
+      color: var(--gray);
     }
 
     .form-group {
@@ -348,25 +367,25 @@
       min-height: 150px;
       resize: vertical;
     }
-    
+   
     .checkbox-group {
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
       margin-top: 0.5rem;
     }
-    
+   
     .checkbox-option {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    
+   
     .checkbox-option input[type="checkbox"] {
       width: auto;
       margin: 0;
     }
-    
+   
     .checkbox-option label {
       margin: 0;
       font-weight: normal;
@@ -391,6 +410,75 @@
       background: #218838;
       transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Notification Styles */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 500;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transform: translateX(120%);
+      transition: transform 0.5s ease-in-out;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+   
+    .notification.show {
+      transform: translateX(0);
+    }
+   
+    .notification.success {
+      background: var(--success);
+      border-left: 5px solid #1e7e34;
+    }
+   
+    .notification.error {
+      background: var(--error);
+      border-left: 5px solid #bd2130;
+    }
+   
+    .notification i {
+      font-size: 1.2rem;
+    }
+   
+    .notification-content {
+      display: flex;
+      flex-direction: column;
+    }
+   
+    .notification-title {
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    /* Form Status Message */
+    .form-status {
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: center;
+      display: none;
+    }
+   
+    .form-status.success {
+      background: rgba(40, 167, 69, 0.15);
+      border: 1px solid var(--success);
+      color: var(--success);
+      display: block;
+    }
+   
+    .form-status.error {
+      background: rgba(220, 53, 69, 0.15);
+      border: 1px solid var(--error);
+      color: var(--error);
+      display: block;
     }
 
     footer {
@@ -491,38 +579,49 @@
       nav ul {
         display: none;
       }
-      
+     
       .menu-toggle {
         display: block;
         font-size: 1.5rem;
         color: white;
         cursor: pointer;
       }
-      
+     
       .hero {
         padding: 6rem 1rem;
       }
-      
+     
       .hero h2 {
         font-size: 2.3rem;
       }
-      
+     
       .hero p {
         font-size: 1.1rem;
       }
-      
+     
       .btn {
         display: block;
         width: max-content;
         margin: 1rem auto;
       }
-      
+     
       .btn-outline {
         margin-left: 0;
       }
-      
+     
       .section-header h2 {
         font-size: 2rem;
+      }
+     
+      .notification {
+        width: calc(100% - 40px);
+        right: 20px;
+        left: 20px;
+        transform: translateY(-150%);
+      }
+     
+      .notification.show {
+        transform: translateY(0);
       }
     }
 
@@ -530,15 +629,15 @@
       .hero {
         padding: 4rem 1rem;
       }
-      
+     
       .hero h2 {
         font-size: 2rem;
       }
-      
+     
       .logo h1 {
         font-size: 1.5rem;
       }
-      
+     
       .checkbox-group {
         flex-direction: column;
         gap: 0.8rem;
@@ -642,27 +741,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr><tr class="highlight">
+            <tr class="highlight">
               <td>Basic Exterior Wash</td>
               <td>$80</td>
-              <td>90</td>
+              <td>$90</td>
               <td>-</td>
             </tr>
-            <tr class="highlight">
+            <tr>
               <td>Interior Detailing</td>
               <td>$100</td>
               <td>$120</td>
               <td>-</td>
             </tr>
-            <tr>
-             
             <tr class="highlight">
               <td>Full Detail (Interior & Exterior)</td>
               <td>$190</td>
               <td>$220</td>
               <td>$300</td>
-            </tr>
-            
             </tr>
           </tbody>
         </table>
@@ -680,8 +775,14 @@
       </div>
       <div class="contact-container">
         <div class="contact-form">
-          <h3>Schedule Your Service</h3>
-          <form>
+          <div class="form-header">
+            <h3>Schedule Your Service</h3>
+            <p>Fill out the form and we'll contact you shortly</p>
+          </div>
+         
+          <div id="form-status" class="form-status"></div>
+         
+          <form id="contact-form">
             <div class="form-group">
               <label for="name">Full Name</label>
               <input type="text" id="name" placeholder="John Smith" required>
@@ -695,6 +796,9 @@
               <input type="tel" id="phone" placeholder="(123) 456-7890" required>
             </div>
             <div class="form-group">
+              <label for="Address">Address </label> <input type="Address" id="address" placeholder="123 Maple Street Anytown, PA 17101 " required>
+            <div class="form-group">
+            </div>    
               <label for="vehicle">Vehicle Type</label>
               <select id="vehicle" required>
                 <option value="">Select Vehicle Type</option>
@@ -717,7 +821,7 @@
                 <option value="fleet">Fleet Services</option>
               </select>
             </div>
-            
+           
             <div class="form-group">
               <label>Can you provide the following at your location?</label>
               <div class="checkbox-group">
@@ -735,7 +839,7 @@
                 </div>
               </div>
             </div>
-            
+           
             <div class="form-group">
               <label for="message">Additional Details</label>
               <textarea id="message" placeholder="Tell us about your vehicle and any special requests..."></textarea>
@@ -782,8 +886,8 @@
         <div class="footer-column">
           <h4>Contact Info</h4>
           <ul class="footer-links">
-            <li><a href="tel:6192449791"><i class="fas fa-phone-alt"></i> 6192449791</a></li>
-            <li><a href="mailto:info@carvelaswash.com"><i class="fas fa-envelope"></i> carvelaswash@gmail.com</a></li>
+            <li><a href="tel:1234567890"><i class="fas fa-phone-alt"></i> (123) 456-7890</a></li>
+            <li><a href="mailto:info@carvelaswash.com"><i class="fas fa-envelope"></i> info@carvelaswash.com</a></li>
             <li><a href="#"><i class="fas fa-map-marker-alt"></i> Washington State</a></li>
           </ul>
         </div>
@@ -793,5 +897,107 @@
       </div>
     </div>
   </footer>
+ 
+  <!-- Notification Container -->
+  <div id="notification" class="notification">
+    <i class="fas fa-check-circle"></i>
+    <div class="notification-content">
+      <div class="notification-title">Success!</div>
+      <div class="notification-message">Your message has been sent successfully.</div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize EmailJS with your user ID
+    emailjs.init("user_YOUR_EMAILJS_USER_ID");
+   
+    // Form submission handler
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+     
+      // Show loading state
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+     
+      // Get form data
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        vehicle: document.getElementById('vehicle').value,
+        service: document.getElementById('service').value,
+        message: document.getElementById('message').value,
+        resources: []
+      };
+     
+      // Get selected resources
+      const waterCheckbox = document.getElementById('water');
+      const powerCheckbox = document.getElementById('power');
+      const noneCheckbox = document.getElementById('none');
+     
+      if (waterCheckbox.checked) formData.resources.push(waterCheckbox.value);
+      if (powerCheckbox.checked) formData.resources.push(powerCheckbox.value);
+      if (noneCheckbox.checked) formData.resources.push(noneCheckbox.value);
+     
+      // Send email using EmailJS
+      emailjs.send('service_YOUR_EMAILJS_SERVICE_ID', 'template_YOUR_EMAILJS_TEMPLATE_ID', formData)
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+         
+          // Show success notification
+          showNotification('Success! Your appointment request has been sent.', 'success');
+         
+          // Reset form
+          document.getElementById('contact-form').reset();
+          document.getElementById('form-status').className = 'form-status success';
+          document.getElementById('form-status').textContent = 'Thank you! We\'ll contact you shortly to confirm your appointment.';
+        }, function(error) {
+          console.log('FAILED...', error);
+         
+          // Show error notification
+          showNotification('Error sending your message. Please try again.', 'error');
+         
+          // Update form status
+          document.getElementById('form-status').className = 'form-status error';
+          document.getElementById('form-status').textContent = 'Error sending your message. Please try again.';
+        })
+        .finally(function() {
+          // Reset button state
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Request Appointment';
+        });
+    });
+   
+    // Function to show notification
+    function showNotification(message, type) {
+      const notification = document.getElementById('notification');
+      const icon = notification.querySelector('i');
+      const title = notification.querySelector('.notification-title');
+      const messageEl = notification.querySelector('.notification-message');
+     
+      // Set notification content
+      messageEl.textContent = message;
+     
+      // Set notification type
+      notification.className = 'notification ' + type;
+     
+      if (type === 'success') {
+        icon.className = 'fas fa-check-circle';
+        title.textContent = 'Success!';
+      } else {
+        icon.className = 'fas fa-exclamation-circle';
+        title.textContent = 'Error!';
+      }
+     
+      // Show notification
+      notification.classList.add('show');
+     
+      // Hide notification after 5 seconds
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 5000);
+    }
+  </script>
 </body>
 </html>
