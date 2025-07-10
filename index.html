@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carvelas Wash | Premium Mobile Car Detailing</title>
+  <meta name="description" content="Professional mobile car detailing services at your location. Book your appointment today!">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
@@ -64,6 +65,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
     }
 
     .logo-icon {
@@ -75,6 +77,7 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 1.8rem;
+      color: white;
     }
 
     .logo span {
@@ -115,6 +118,15 @@
 
     nav ul li a:hover {
       color: var(--accent);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+      background: none;
+      border: none;
     }
 
     .hero {
@@ -301,7 +313,6 @@
       font-weight: 600;
     }
 
-    /* CENTERED CONTACT SECTION */
     .contact-container {
       display: flex;
       justify-content: center;
@@ -404,6 +415,7 @@
       font-size: 1.1rem;
       cursor: pointer;
       transition: var(--transition);
+      position: relative;
     }
 
     .btn-block:hover {
@@ -412,7 +424,28 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
-    /* Notification Styles */
+    .btn-block.loading {
+      color: transparent;
+    }
+
+    .btn-block.loading::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
     .notification {
       position: fixed;
       top: 20px;
@@ -458,7 +491,6 @@
       margin-bottom: 3px;
     }
 
-    /* Form Status Message */
     .form-status {
       padding: 15px;
       border-radius: 8px;
@@ -554,6 +586,7 @@
       border-radius: 50%;
       color: white;
       transition: var(--transition);
+      text-decoration: none;
     }
 
     .social-links a:hover {
@@ -569,6 +602,7 @@
       opacity: 0.7;
     }
 
+    /* Mobile Styles */
     @media (max-width: 992px) {
       .hero h2 {
         font-size: 2.8rem;
@@ -578,13 +612,28 @@
     @media (max-width: 768px) {
       nav ul {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--primary-dark);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+      }
+     
+      nav ul.active {
+        display: flex;
+      }
+     
+      nav ul li {
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
       }
      
       .menu-toggle {
         display: block;
-        font-size: 1.5rem;
-        color: white;
-        cursor: pointer;
       }
      
       .hero {
@@ -649,21 +698,21 @@
   <!-- Header -->
   <header>
     <div class="container header-container">
-      <div class="logo">
+      <a href="#home" class="logo">
         <i class="fas fa-car logo-icon"></i>
         <h1>Carvelas <span>Wash</span></h1>
-      </div>
+      </a>
       <nav>
-        <ul>
+        <ul id="nav-menu">
           <li><a href="#home" class="active">Home</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <div class="menu-toggle">
+      <button class="menu-toggle" aria-label="Toggle navigation menu">
         <i class="fas fa-bars"></i>
-      </div>
+      </button>
     </div>
   </header>
 
@@ -796,9 +845,10 @@
               <input type="tel" id="phone" placeholder="(123) 456-7890" required>
             </div>
             <div class="form-group">
-              <label for="Address">Address </label> <input type="Address" id="address" placeholder="123 Maple Street Anytown, PA 17101 " required>
+              <label for="address">Address</label>
+              <input type="text" id="address" placeholder="123 Maple Street, Anytown, PA 17101" required>
+            </div>
             <div class="form-group">
-            </div>    
               <label for="vehicle">Vehicle Type</label>
               <select id="vehicle" required>
                 <option value="">Select Vehicle Type</option>
@@ -838,20 +888,19 @@
               </div>
             </div>
             <div class="form-group">
-  <label for="event-date">Select date:</label>
-  <input type="date" id="event-date" name="event-date" class="form-control">
-</div>
-<div class="form-group">
-  <label for="event-time">Select time:</label>
-  <input type="time" id="event-time" name="event-time" class="form-control" min="08:00" max="20:00" step="1800">
-</div>
-       
+              <label for="event-date">Select date:</label>
+              <input type="date" id="event-date" name="event-date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="event-time">Select time:</label>
+              <input type="time" id="event-time" name="event-time" class="form-control" min="08:00" max="20:00" step="1800" required>
+            </div>
            
             <div class="form-group">
               <label for="message">Additional Details</label>
               <textarea id="message" placeholder="Tell us about your vehicle and any special requests..."></textarea>
             </div>
-            <button type="submit" class="btn-block">Request Appointment</button>
+            <button type="submit" class="btn-block" id="submit-btn">Request Appointment</button>
           </form>
         </div>
       </div>
@@ -866,9 +915,9 @@
           <h4>About Carvelas Wash</h4>
           <p>Premium mobile car detailing service bringing professional vehicle care directly to your home or workplace throughout Washington State.</p>
           <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
           </div>
         </div>
         <div class="footer-column">
@@ -917,16 +966,37 @@
   <script>
     // Initialize EmailJS with your user ID
     emailjs.init("ZsCCFqsTEd5Ja5xku");
-   
+    
+    // Mobile menu toggle
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('#nav-menu').classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('#nav-menu').classList.remove('active');
+      });
+    });
+    
     // Form submission handler
     document.getElementById('contact-form').addEventListener('submit', function(event) {
       event.preventDefault();
-     
+      const submitBtn = document.getElementById('submit-btn');
+      const formStatus = document.getElementById('form-status');
+      
+      // Validate at least one checkbox is checked
+      const checkboxes = document.querySelectorAll('input[name="resources"]:checked');
+      if (checkboxes.length === 0) {
+        showNotification('Please select at least one option for available resources.', 'error');
+        return;
+      }
+      
       // Show loading state
-      const submitBtn = event.target.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-     
+      submitBtn.classList.add('loading');
+      submitBtn.textContent = '';
+      
       // Get form data
       const formData = {
         name: document.getElementById('name').value,
@@ -935,63 +1005,73 @@
         address: document.getElementById('address').value,
         vehicle: document.getElementById('vehicle').value,
         service: document.getElementById('service').value,
-        date: document.getElementById('date').value,
-        time: document.getElementById('time').value,
+        date: document.getElementById('event-date').value,
+        time: document.getElementById('event-time').value,
         message: document.getElementById('message').value,
-        resources: []
+        resources: Array.from(checkboxes).map(cb => cb.value)
       };
-     
-      // Get selected resources
-      const waterCheckbox = document.getElementById('water');
-      const powerCheckbox = document.getElementById('power');
-      const noneCheckbox = document.getElementById('none');
-     
-      if (waterCheckbox.checked) formData.resources.push(waterCheckbox.value);
-      if (powerCheckbox.checked) formData.resources.push(powerCheckbox.value);
-      if (noneCheckbox.checked) formData.resources.push(noneCheckbox.value);
-     
+      
+      // Validate date is not in the past
+      const today = new Date().toISOString().split('T')[0];
+      if (formData.date < today) {
+        showNotification('Please select a date in the future.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        submitBtn.textContent = 'Request Appointment';
+        return;
+      }
+      
       // Send email using EmailJS
       emailjs.send('143rc26013', 'template_j0bs2j8', formData)
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
-         
+          
           // Show success notification
           showNotification('Success! Your appointment request has been sent.', 'success');
-         
+          
+          // Update form status
+          formStatus.className = 'form-status success';
+          formStatus.textContent = 'Thank you! We\'ll contact you shortly to confirm your appointment.';
+          
           // Reset form
           document.getElementById('contact-form').reset();
-          document.getElementById('form-status').className = 'form-status success';
-          document.getElementById('form-status').textContent = 'Thank you! We\'ll contact you shortly to confirm your appointment.';
+          
+          // Hide status message after 5 seconds
+          setTimeout(() => {
+            formStatus.className = 'form-status';
+            formStatus.textContent = '';
+          }, 5000);
         }, function(error) {
           console.log('FAILED...', error);
-         
+          
           // Show error notification
           showNotification('Error sending your message. Please try again.', 'error');
-         
+          
           // Update form status
-          document.getElementById('form-status').className = 'form-status error';
-          document.getElementById('form-status').textContent = 'Error sending your message. Please try again.';
+          formStatus.className = 'form-status error';
+          formStatus.textContent = 'Error sending your message. Please try again.';
         })
         .finally(function() {
           // Reset button state
           submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
           submitBtn.textContent = 'Request Appointment';
         });
     });
-   
+    
     // Function to show notification
     function showNotification(message, type) {
       const notification = document.getElementById('notification');
       const icon = notification.querySelector('i');
       const title = notification.querySelector('.notification-title');
       const messageEl = notification.querySelector('.notification-message');
-     
+      
       // Set notification content
       messageEl.textContent = message;
-     
+      
       // Set notification type
       notification.className = 'notification ' + type;
-     
+      
       if (type === 'success') {
         icon.className = 'fas fa-check-circle';
         title.textContent = 'Success!';
@@ -999,15 +1079,25 @@
         icon.className = 'fas fa-exclamation-circle';
         title.textContent = 'Error!';
       }
-     
+      
       // Show notification
       notification.classList.add('show');
-     
+      
       // Hide notification after 5 seconds
       setTimeout(() => {
         notification.classList.remove('show');
       }, 5000);
     }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
   </script>
 </body>
 </html>
